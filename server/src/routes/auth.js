@@ -94,13 +94,21 @@ router.post('/signin', async (req, res) => {
 // Send OTP endpoint (simplified - stores OTP in DB)
 router.post('/send-otp', async (req, res) => {
   try {
+    console.log('Send OTP request received:', req.body);
     const { email } = req.body;
     
     if (!email) {
       return res.status(400).json({ error: 'Email is required' });
     }
 
-    const db = getDb();
+    let db;
+    try {
+      db = getDb();
+    } catch (dbError) {
+      console.error('Database not connected:', dbError.message);
+      return res.status(500).json({ error: 'Database connection error' });
+    }
+
     const otpCollection = db.collection('otps');
     
     // Generate 6-digit OTP
@@ -129,8 +137,8 @@ router.post('/send-otp', async (req, res) => {
       demo_otp: otp 
     });
   } catch (error) {
-    console.error('OTP send error:', error);
-    res.status(500).json({ error: 'Internal server error while sending OTP' });
+    console.error('OTP send error:', error.message, error.stack);
+    res.status(500).json({ error: `Failed to send OTP: ${error.message}` });
   }
 });
 

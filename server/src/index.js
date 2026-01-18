@@ -35,6 +35,21 @@ app.use((req, res, next) => {
 // Serve uploaded files statically
 app.use('/uploads', express.static(path.join(__dirname, '..', 'uploads')));
 
+// Root endpoint
+app.get('/', (req, res) => {
+  res.json({ 
+    message: 'Product Management API',
+    version: '1.0.0',
+    status: 'running',
+    endpoints: {
+      health: '/api/health',
+      auth: '/api/auth/*',
+      products: '/api/products/*',
+      upload: '/api/upload-image'
+    }
+  });
+});
+
 // Health check endpoint
 app.get('/api/health', (req, res) => {
   res.json({ status: 'ok' });

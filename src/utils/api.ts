@@ -62,25 +62,43 @@ class API {
   }
 
   async sendOTP(email: string) {
-    const response = await fetch(`${API_BASE}/auth/send-otp`, {
-      method: 'POST',
-      headers: this.getHeaders(),
-      body: JSON.stringify({ email }),
-    });
-    return response.json();
+    try {
+      const response = await fetch(`${API_BASE}/auth/send-otp`, {
+        method: 'POST',
+        headers: this.getHeaders(),
+        body: JSON.stringify({ email }),
+      });
+      if (!response.ok) {
+        const errorData = await response.json().catch(() => ({ error: 'Server error' }));
+        return { error: errorData.error || `Request failed (${response.status})` };
+      }
+      return response.json();
+    } catch (err) {
+      console.error('sendOTP network error:', err);
+      return { error: 'Network error. Please check your connection.' };
+    }
   }
 
   async verifyOTP(email: string, otp: string) {
-    const response = await fetch(`${API_BASE}/auth/verify-otp`, {
-      method: 'POST',
-      headers: this.getHeaders(),
-      body: JSON.stringify({ email, otp }),
-    });
-    const data = await response.json();
-    if (data.access_token) {
-      localStorage.setItem('access_token', data.access_token);
+    try {
+      const response = await fetch(`${API_BASE}/auth/verify-otp`, {
+        method: 'POST',
+        headers: this.getHeaders(),
+        body: JSON.stringify({ email, otp }),
+      });
+      if (!response.ok) {
+        const errorData = await response.json().catch(() => ({ error: 'Server error' }));
+        return { error: errorData.error || `Request failed (${response.status})` };
+      }
+      const data = await response.json();
+      if (data.access_token) {
+        localStorage.setItem('access_token', data.access_token);
+      }
+      return data;
+    } catch (err) {
+      console.error('verifyOTP network error:', err);
+      return { error: 'Network error. Please check your connection.' };
     }
-    return data;
   }
 
   // Products

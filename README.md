@@ -332,28 +332,4 @@ npm run dev
 
 ---
 
-## 📝 License
 
-MIT License - feel free to use this project for learning or commercial purposes.
-
----
-
-## 🤝 Contributing
-
-1. Fork the repository
-2. Create a feature branch (`git checkout -b feature/amazing-feature`)
-3. Commit changes (`git commit -m 'Add amazing feature'`)
-4. Push to branch (`git push origin feature/amazing-feature`)
-5. Open a Pull Request
-
----
-
-## 👤 Author
-
-**FlashArk271**
-
-- GitHub: [@FlashArk271](https://github.com/FlashArk271)
-
----
-
-Made with ❤️ using React, Node.js, and MongoDB

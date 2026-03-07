@@ -1,4 +1,4 @@
-# 🛒 Seller Admin Product Management
+# Seller Admin Product Management
 
 A modern product management dashboard for sellers to manage their inventory, with OTP-based authentication and a clean, intuitive interface.
 
@@ -8,22 +8,22 @@ A modern product management dashboard for sellers to manage their inventory, wit
 ![Vite](https://img.shields.io/badge/Vite-5-purple?logo=vite)
 ![TailwindCSS](https://img.shields.io/badge/TailwindCSS-3-blue?logo=tailwindcss)
 
-## 🌐 Live Demo
+## Live Demo
 
 - **Frontend**: [https://product-dashboard-sigma-drab.vercel.app](https://product-dashboard-sigma-drab.vercel.app)
 - **Backend API**: [https://productdashboard-oc2r.onrender.com](https://productdashboard-oc2r.onrender.com)
 
-## ✨ Features
+## Features
 
-- 📱 **OTP-based Authentication** - Secure login with email OTP verification
-- 📦 **Product Management** - Add, edit, delete, and publish products
-- 🖼️ **Image Upload** - Multiple product images with preview
-- 📊 **Dashboard** - View published and unpublished products
-- 🔍 **Product Categories** - Foods, Electronics, Clothes, Beauty Products, Others
-- ↔️ **Exchange Eligibility** - Mark products as eligible for exchange/return
-- 📱 **Responsive Design** - Works on desktop and mobile
+- **OTP-based Authentication** - Secure login with email OTP verification
+- **Product Management** - Add, edit, delete, and publish products
+- **Image Upload** - Multiple product images with preview
+- **Dashboard** - View published and unpublished products
+- **Product Categories** - Foods, Electronics, Clothes, Beauty Products, Others
+- **Exchange Eligibility** - Mark products as eligible for exchange/return
+- **Responsive Design** - Works on desktop and mobile
 
-## 🏗️ Tech Stack
+## Tech Stack
 
 ### Frontend
 - **React 18** with TypeScript
@@ -40,7 +40,7 @@ A modern product management dashboard for sellers to manage their inventory, wit
 
 ---
 
-## 🚀 Getting Started
+## Getting Started
 
 ### Prerequisites
 
@@ -312,48 +312,5 @@ npm install
 npm run dev
 ```
 
----
 
-## 🐛 Troubleshooting
 
-### "Failed to connect to MongoDB Atlas"
-- Check if your IP is whitelisted in MongoDB Atlas → Network Access
-- Verify the connection string is correct
-- Ensure the database user has proper permissions
-
-### "Server error" when sending OTP
-- Make sure the backend is running
-- Check if `VITE_API_URL` points to correct backend URL
-- Verify MongoDB connection is established
-
-### CORS errors
-- Backend should have `origin: '*'` in CORS config
-- Make sure frontend is calling the correct API URL
-
----
-
-## 📝 License
-
-MIT License - feel free to use this project for learning or commercial purposes.
-
----
-
-## 🤝 Contributing
-
-1. Fork the repository
-2. Create a feature branch (`git checkout -b feature/amazing-feature`)
-3. Commit changes (`git commit -m 'Add amazing feature'`)
-4. Push to branch (`git push origin feature/amazing-feature`)
-5. Open a Pull Request
-
----
-
-## 👤 Author
-
-**FlashArk271**
-
-- GitHub: [@FlashArk271](https://github.com/FlashArk271)
-
----
-
-Made with ❤️ using React, Node.js, and MongoDB

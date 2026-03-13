@@ -107,7 +107,6 @@ export default function AuthPage({ onAuthSuccess }: AuthPageProps) {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
   const [step, setStep] = useState<'email' | 'otp'>('email');
-  const [demoOtp, setDemoOtp] = useState('');
 
   const handleSendOTP = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -119,9 +118,6 @@ export default function AuthPage({ onAuthSuccess }: AuthPageProps) {
       if (result.error) {
         setError(result.error);
       } else {
-        if (result.demo_otp) {
-          setDemoOtp(result.demo_otp);
-        }
         setStep('otp');
       }
     } catch (err) {
@@ -152,29 +148,6 @@ export default function AuthPage({ onAuthSuccess }: AuthPageProps) {
     } catch (err) {
       setError('Invalid OTP. Please try again.');
       console.error('OTP verify error:', err);
-    } finally {
-      setLoading(false);
-    }
-  };
-
-  const handleResendOTP = async () => {
-    setLoading(true);
-    setError('');
-    setOtp('');
-
-    try {
-      const result = await api.sendOTP(email);
-      if (result.error) {
-        setError(result.error);
-      } else {
-        if (result.demo_otp) {
-          setDemoOtp(result.demo_otp);
-        }
-        setError('');
-      }
-    } catch (err) {
-      setError('Failed to resend OTP. Please try again.');
-      console.error('OTP resend error:', err);
     } finally {
       setLoading(false);
     }
@@ -224,14 +197,8 @@ export default function AuthPage({ onAuthSuccess }: AuthPageProps) {
           <form onSubmit={handleVerifyOTP}>
             <div className="absolute content-stretch flex flex-col gap-[8px] items-start left-[171px] top-[260px] w-[376px]">
               <p className="css-4hzbpn font-['Inter:Medium',sans-serif] font-medium leading-[normal] not-italic relative shrink-0 text-[14px] text-black w-full">Enter OTP</p>
-              
-              {demoOtp && (
-                <div className="bg-green-50 border border-green-200 rounded-lg p-2 w-full mb-2">
-                  <p className="text-[12px] text-green-700 text-center">
-                    Demo OTP: <span className="font-bold">{demoOtp}</span>
-                  </p>
-                </div>
-              )}
+
+              <p className="text-[12px] text-[#98a2b3] w-full text-center">We sent a 6-digit OTP to {email}</p>
 
               <div className="flex justify-center w-full">
                 <InputOTP
@@ -265,29 +232,14 @@ export default function AuthPage({ onAuthSuccess }: AuthPageProps) {
               </p>
             </button>
 
-            <div className="absolute left-[171px] top-[455px] w-[376px] text-center">
-              <p className="text-[14px] text-[#98a2b3]">
-                Didnt recive OTP ?{' '}
-                <button
-                  type="button"
-                  onClick={handleResendOTP}
-                  disabled={loading}
-                  className="text-[#071074] font-medium underline hover:no-underline disabled:opacity-50"
-                >
-                  Resend
-                </button>
-              </p>
-            </div>
-
             <button
               type="button"
               onClick={() => {
                 setStep('email');
                 setOtp('');
                 setError('');
-                setDemoOtp('');
               }}
-              className="absolute left-[171px] top-[490px] w-[376px] text-center text-[14px] text-[#98a2b3] hover:text-[#071074]"
+              className="absolute left-[171px] top-[455px] w-[376px] text-center text-[14px] text-[#98a2b3] hover:text-[#071074]"
             >
               ← Back to email
             </button>
